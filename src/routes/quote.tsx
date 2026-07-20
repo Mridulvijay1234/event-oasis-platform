@@ -37,7 +37,10 @@ const NEED_OPTIONS = [
 function Quote() {
   const runQuote = useServerFn(generateQuote);
   const mutation = useMutation({
-    mutationFn: (payload: QuoteInput) => runQuote({ data: payload }),
+    mutationFn: async (payload: QuoteInput) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return (runQuote as any)({ data: payload }) as Promise<{ quote: string }>;
+    },
   });
 
   const [needs, setNeeds] = useState<string[]>([]);
