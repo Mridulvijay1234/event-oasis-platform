@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { Loader2, Sparkles, MessageCircle } from "lucide-react";
-import { generateQuote } from "@/lib/quote.functions";
+import { generateQuote, type QuoteInput } from "@/lib/quote.functions";
 import { whatsappUrl } from "@/lib/site";
 import { loungeImage } from "@/lib/products";
 
@@ -37,7 +37,7 @@ const NEED_OPTIONS = [
 function Quote() {
   const runQuote = useServerFn(generateQuote);
   const mutation = useMutation({
-    mutationFn: (payload: Parameters<typeof runQuote>[0]["data"]) => runQuote({ data: payload }),
+    mutationFn: (payload: QuoteInput) => runQuote({ data: payload }),
   });
 
   const [needs, setNeeds] = useState<string[]>([]);

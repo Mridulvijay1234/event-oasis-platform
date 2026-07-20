@@ -9,15 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as RentalsRouteImport } from './routes/rentals'
+import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BookingRouteImport } from './routes/booking'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RentalsSlugRouteImport } from './routes/rentals.$slug'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -33,6 +41,11 @@ const RentalsRoute = RentalsRouteImport.update({
   path: '/rentals',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QuoteRoute = QuoteRouteImport.update({
+  id: '/quote',
+  path: '/quote',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
@@ -41,6 +54,11 @@ const GalleryRoute = GalleryRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingRoute = BookingRouteImport.update({
+  id: '/booking',
+  path: '/booking',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -62,32 +80,41 @@ const RentalsSlugRoute = RentalsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/booking': typeof BookingRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/quote': typeof QuoteRoute
   '/rentals': typeof RentalsRouteWithChildren
   '/reviews': typeof ReviewsRoute
   '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/rentals/$slug': typeof RentalsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/booking': typeof BookingRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/quote': typeof QuoteRoute
   '/rentals': typeof RentalsRouteWithChildren
   '/reviews': typeof ReviewsRoute
   '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/rentals/$slug': typeof RentalsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/booking': typeof BookingRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/quote': typeof QuoteRoute
   '/rentals': typeof RentalsRouteWithChildren
   '/reviews': typeof ReviewsRoute
   '/services': typeof ServicesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/rentals/$slug': typeof RentalsSlugRoute
 }
 export interface FileRouteTypes {
@@ -95,46 +122,65 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/booking'
     | '/contact'
     | '/gallery'
+    | '/quote'
     | '/rentals'
     | '/reviews'
     | '/services'
+    | '/sitemap.xml'
     | '/rentals/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/booking'
     | '/contact'
     | '/gallery'
+    | '/quote'
     | '/rentals'
     | '/reviews'
     | '/services'
+    | '/sitemap.xml'
     | '/rentals/$slug'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/booking'
     | '/contact'
     | '/gallery'
+    | '/quote'
     | '/rentals'
     | '/reviews'
     | '/services'
+    | '/sitemap.xml'
     | '/rentals/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BookingRoute: typeof BookingRoute
   ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
+  QuoteRoute: typeof QuoteRoute
   RentalsRoute: typeof RentalsRouteWithChildren
   ReviewsRoute: typeof ReviewsRoute
   ServicesRoute: typeof ServicesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -156,6 +202,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RentalsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/quote': {
+      id: '/quote'
+      path: '/quote'
+      fullPath: '/quote'
+      preLoaderRoute: typeof QuoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
@@ -168,6 +221,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking': {
+      id: '/booking'
+      path: '/booking'
+      fullPath: '/booking'
+      preLoaderRoute: typeof BookingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -208,11 +268,14 @@ const RentalsRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BookingRoute: BookingRoute,
   ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
+  QuoteRoute: QuoteRoute,
   RentalsRoute: RentalsRouteWithChildren,
   ReviewsRoute: ReviewsRoute,
   ServicesRoute: ServicesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
