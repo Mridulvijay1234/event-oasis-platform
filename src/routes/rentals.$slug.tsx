@@ -74,7 +74,7 @@ Please share availability.`;
           </div>
           {gallery.length > 1 && (
             <div className="mt-4 grid grid-cols-4 gap-3">
-              {gallery.map((g, i) => (
+              {gallery.map((g: string, i: number) => (
                 <button
                   key={i}
                   onClick={() => setActive(i)}
@@ -157,7 +157,7 @@ Please share availability.`;
           <div className="mt-10">
             <h2 className="font-display text-xl text-forest-deep">What's included</h2>
             <ul className="mt-4 space-y-2">
-              {product.features.map((f) => (
+              {product.features.map((f: string) => (
                 <li key={f} className="flex items-start gap-2 text-sm">
                   <Check className="mt-0.5 h-4 w-4 text-gold shrink-0" /> {f}
                 </li>
@@ -168,7 +168,7 @@ Please share availability.`;
           <div className="mt-8">
             <h2 className="font-display text-xl text-forest-deep">Specifications</h2>
             <dl className="mt-4 grid grid-cols-2 gap-4">
-              {product.specs.map((s) => (
+              {product.specs.map((s: { label: string; value: string }) => (
                 <div key={s.label} className="border-t border-border pt-3">
                   <dt className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">{s.label}</dt>
                   <dd className="mt-1 text-forest-deep">{s.value}</dd>
